@@ -1,7 +1,7 @@
-import cuid = require('cuid')
-import DataIntervalTree from '../index' // import IntervalTree from 'node-interval-tree'
+import cuid = require("cuid");
+import DataIntervalTree from "../index"; // import IntervalTree from 'node-interval-tree'
 
-const intervalTree = new DataIntervalTree<string>()
+const intervalTree = new DataIntervalTree<string>();
 
 /* Usage:
 insert - intervalTree.insert(low: number, high: number, data: T) =>
@@ -14,31 +14,31 @@ remove - intervalTree.remove(low: number, high: number, data: T) =>
 */
 
 function getRandomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 for (let i = 1; i <= 100; i++) {
-  let low = getRandomInt(0, 100)
-  let high = getRandomInt(0, 100)
+  let low = getRandomInt(0, 100);
+  let high = getRandomInt(0, 100);
 
   if (high < low) {
-    const temp = high
-    high = low
-    low = temp
+    const temp = high;
+    high = low;
+    low = temp;
   }
 
-  intervalTree.insert(low, high, cuid())
+  intervalTree.insert(low, high, cuid());
 }
 
-console.log('Number of the records in the tree: ' + intervalTree.count)
+console.log("Number of the records in the tree: " + intervalTree.count);
 
-const results = intervalTree.search(10, 15)
+const results = intervalTree.search(10, 15);
 if (!results || results.length === 0) {
-  console.log('No overlapping intervals')
+  console.log("No overlapping intervals");
 } else {
-  console.log('Found ' + results.length + ' overlapping intervals')
+  console.log("Found " + results.length + " overlapping intervals");
 
   for (let i = 0; i < results.length; i++) {
-    console.log(results[i])
+    console.log(results[i]);
   }
 }
